@@ -1,0 +1,109 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'publish' ]
+2 info using npm@3.10.10
+3 info using node@v6.10.3
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: 'E:\\web\\easy_sock',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory C:\Users\neallin\AppData\Roaming\npm-cache\easy_sock_16bit\0.3.2\package.tgz not in flight; packing
+9 verbose correctMkdir C:\Users\neallin\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+10 info lifecycle easy_sock_16bit@0.3.2~prepublish: easy_sock_16bit@0.3.2
+11 silly lifecycle easy_sock_16bit@0.3.2~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ 'C:\\Users\\neallin\\AppData\\Roaming\\npm-cache\\easy_sock_16bit\\0.3.2\\package.tgz',
+12 verbose tar pack   'E:\\web\\easy_sock' ]
+13 verbose tarball C:\Users\neallin\AppData\Roaming\npm-cache\easy_sock_16bit\0.3.2\package.tgz
+14 verbose folder E:\web\easy_sock
+15 verbose addLocalTarball adding from inside cache C:\Users\neallin\AppData\Roaming\npm-cache\easy_sock_16bit\0.3.2\package.tgz
+16 verbose correctMkdir C:\Users\neallin\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+17 silly cache afterAdd easy_sock_16bit@0.3.2
+18 verbose afterAdd C:\Users\neallin\AppData\Roaming\npm-cache\easy_sock_16bit\0.3.2\package\package.json not in flight; writing
+19 verbose correctMkdir C:\Users\neallin\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+20 verbose afterAdd C:\Users\neallin\AppData\Roaming\npm-cache\easy_sock_16bit\0.3.2\package\package.json written
+21 silly publish { name: 'easy_sock_16bit',
+21 silly publish   version: '0.3.2',
+21 silly publish   description: 'A easy and foolish way to develop a socket module, which is easy to use as well. Now support both TCP and UDP.',
+21 silly publish   main: 'index.js',
+21 silly publish   scripts: { test: 'node test.js' },
+21 silly publish   keywords: [ 'socket' ],
+21 silly publish   author: { name: 'neallin' },
+21 silly publish   license: 'ISC',
+21 silly publish   _shasum: 'fc6ef5b4db786c3370035bec4a3dd687afd33be1',
+21 silly publish   _from: '.',
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/neallin/easy_sock.git' },
+21 silly publish   bugs: { url: 'https://github.com/neallin/easy_sock/issues' },
+21 silly publish   homepage: 'https://github.com/ysbcc/easy_sock#readme',
+21 silly publish   readme: '# easy_sock — Make socket use easier\r\n\r\n快速开发基于tcp连接的二进制网络协议接口的nodejs模块\r\n\r\nA fast way to create TCP socket API in nodejs\r\n\r\n0.3.0 updated : easy_sock supports UDP now! See test_udp.js\r\n\r\n------\r\neasy_sock帮你快速开发基于tcp协议的接口，快速打通nodejs跟其他私有协议server的交互。让你做到像调用本地接口一样调用server api。\r\n\r\neasy_sock helps you to build a reliable, friendly used socket Api, with any kinds of binary protocols. \r\n\r\neasy_sock主要解决以下问题：\r\n\r\neasy_sock helps you to solve the follow probrams:\r\n\r\n- 处理socket发送、接收数据，以及数据包完整性校验\r\nTake care of send/receive message, and check whether the package is complete\r\n- 封装网络请求中各种复杂的异步调用以及中间过程，屏蔽tcp连接细节\r\nTake care of asyn calls in socket use. You don\'t need to call "connect()" before use.\r\n- 支持长连接、socket复用以及并发请求\r\nKeep alive mode is available. Send multi request at the same time in a single socket.\r\n- 自动管理连接状态，在合适的时候帮你断开连接或重新连接\r\nConnect and close socket Automatically\r\n- 各种异常处理\r\nCall you when error occurs\r\n\r\n## 什么场景下适合使用\r\n\r\n如果你的网络协议符合以下特性，便可以使用easy_sock：\r\nIn what circumstances can I use easy_sock:\r\n\r\n- 基于tcp连接，通过二进制或文本协议封包\r\nBase on tcp connect, binary or text protocols\r\n- 符合一来一回的应答试请求\r\nSend one request and get one response\r\n- 支持通过请求序列号的方式来接收和返回并发请求包(大部分网络协议都支持，否则无法支持并发)\r\nThe Server side support concurrent request, use sequence number to identify certain request\r\n\r\n## 安装 Install\r\n\r\n```bash\r\nnpm install easy_sock\r\n```\r\n\r\n## 使用简单，任性   Easy to use\r\n下面通过一个基于easy_sock封装的cmem接口，来演示如何使用：\r\n（下面不翻译了，自己看代码吧）\r\n```javascript\r\nvar Cmem = require("cmem_core");\r\nvar client = new Cmem({\r\n  ip:"127.0.0.1",\r\n  port:9101,\r\n\tkeepAlive : false\r\n});\r\n\r\nclient.getData("key1",function(err, data){...});\r\nclient.getData("key2",function(err, data){...});\r\nclient.getData("key3",function(err, data){\r\n  client.getData("key4",function(err, data){...});\r\n});\r\n```\r\n这是一个短连接的例子(keepAlive=false)。\r\n可以看到，代码里没有connect、close等方法的调用，因为easy_sock已经帮你封装好了，会在第一次请求的时候建立连接，在没有任何请求后断开连接。注意到代码里面实际包含了并发请求和串行请求，不用担心会同时发起多个tcp connection，所有请求只会共享一个tcp连接。\r\n\r\n注意到key4是在key3回调后才发起请求的，这时候有可能因为前三个请求已经返回而断开连接。遇到这种情况下，程序会再次发起一个新连接完成请求，然后断开。\r\n当keepAlive=true时，会使用长连接方式，这时候必须主动调用close()方法来断开连接。\r\n\r\n## 三步完成接口开发\r\n你只需要实现以下3个方法，便可完成任何一种tcp网络请求：\r\n\r\nAll you need to do is finish the following functions, then an Api is accomplish:\r\n\r\n- **encode**:将需要发送的数据按协议进行二进制编码\r\n- **decode**:将接收到的包进行解码，转换成js可操作的格式\r\n- **isReceiveComplete**:判断当前数据包是否完整\r\n\r\n你可以通过C代码来实现这三个方法。任何类型的tcp协议，只要实现了这3个接口，剩下的事情都一样。这就是为什么easy_sock能存在的原因:)\r\n\r\nYou can make a gyp to do this. As a matter of fact, no matter what protocol it is, all works are the same except these three functions. That\'s why easy_sock is written.\r\n\r\n## 简单例子\r\n\r\n下面通过一个demo演示各接口的使用方法：\r\n\r\n```javascript\r\nfunction createSocket(){\r\n\tvar easysock = new EasySock();\r\n\teasysock.setConfig({\r\n\t\tip : "127.0.0.1",\r\n\t\tport : 9101,\t\r\n\t\tkeepAlive : false,\t\r\n\t\ttimeout : 50\t//0 by default\r\n\t});\r\n\t\r\n\t//check if the package is received complete\r\n\teasysock.isReceiveComplete = function(packet){\t\t\r\n\t\tvar len = 0;\t\r\n\t\t//your code here..\r\n\t\t\r\n\t\t/* \r\n\t\t* Check if the package is received complete. If not, return 0.\r\n\t\t* Otherwise return length of the FIRST complete package.\r\n\t\t* If the buffer contains more than one package--it usually happens when package size is small--, \r\n\t\t* just return the size of first one(not total).\r\n\t\t*/\r\n\t\treturn len;\r\n\t};\r\n\t\r\n\t//encode the data to binary \r\n\teasysock.encode = function(data, seq){\r\n\t\tvar packet = new Buffer(100);\r\n\t\tpacket.writeInt32BE(seq, 0);\r\n\t\t//your code here..\r\n\r\n\t\t//Translate the "data"(usually is a json or string) into a Buffer, and return the Buffer\r\n\t\treturn packet;\t\t\r\n\t};\r\n\t\r\n\t//decode the buffer\r\n\teasysock.decode = function(packet){\r\n\t\t//The packet is a Buffer with a complete response. So decode the buffer to other type of data.\r\n\t\tvar seq = packet.readInt32BE(0);\r\n\t\t//do sth else\r\n\t\t\t\r\n\t\t//must return the result and seq\r\n\t\treturn {\r\n\t\t\tresult : {},\r\n\t\t\tseq : seq\r\n\t\t};\r\n\t\t\r\n\t};\r\n\treturn easysock;\r\n}\r\n\r\nvar client = createSocket();\r\n\r\nclient.write({\r\n\t\tkey : ""\r\n\t}, \r\n\tfunction(err, data){\r\n\t\tif (err){\r\n\t\t\t//err is a string\r\n\t\t\tconsole.log("fail:" + err);\r\n\t\t}\r\n\t\telse{\r\n\t\t\tconsole.log("success");\r\n\t\t\tconsole.dir(data);\r\n\t\t}\r\n\t}\r\n);\r\n```\r\n\r\n如有任何意见欢迎交流 vicyao#tencent.com\r\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '664320c61df7188435950b2f574dba76c2ee4412',
+21 silly publish   _id: 'easy_sock_16bit@0.3.2' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name easy_sock_16bit
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry http://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'easy_sock_16bit',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'easy_sock_16bit',
+26 silly mapToRegistry   name: 'easy_sock_16bit',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri http://registry.npmjs.org/easy_sock_16bit
+28 verbose publish registryBase http://registry.npmjs.org/
+29 silly publish uploading C:\Users\neallin\AppData\Roaming\npm-cache\easy_sock_16bit\0.3.2\package.tgz
+30 verbose request uri http://registry.npmjs.org/easy_sock_16bit
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 16:00:36
+33 verbose request using bearer token for auth
+34 verbose request id e8317465bc899363
+35 http request PUT http://registry.npmjs.org/easy_sock_16bit
+36 http 403 http://registry.npmjs.org/easy_sock_16bit
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '91',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Tue, 24 Oct 2017 08:00:23 GMT',
+37 verbose headers   'x-served-by': 'cache-nrt6142-NRT',
+37 verbose headers   'x-cache': 'MISS, MISS from SK-SQUIDDEV-108',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1508832023.281732,VS0,VE616',
+37 verbose headers   vary: 'Accept-Encoding, Accept',
+37 verbose headers   'x-cache-lookup': 'MISS from SK-SQUIDDEV-108:8080',
+37 verbose headers   connection: 'close' }
+38 verbose request invalidating C:\Users\neallin\AppData\Roaming\npm-cache\registry.npmjs.org\easy_sock_16bit on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: You cannot publish over the previously published version 0.3.2. : easy_sock_16bit
+40 verbose stack     at makeError (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:302:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:290:14)
+40 verbose stack     at Request._callback (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:210:14)
+40 verbose stack     at Request.self.callback (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:187:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:1048:10)
+40 verbose stack     at emitOne (events.js:96:13)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\request\request.js:969:12)
+41 verbose statusCode 403
+42 verbose pkgid easy_sock_16bit
+43 verbose cwd E:\web\easy_sock
+44 error Windows_NT 6.1.7601
+45 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "publish"
+46 error node v6.10.3
+47 error npm  v3.10.10
+48 error code E403
+49 error You cannot publish over the previously published version 0.3.2. : easy_sock_16bit
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]

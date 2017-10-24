@@ -1,6 +1,6 @@
 {
-  "name": "easy_sock",
-  "version": "0.3.1",
+  "name": "easy_sock_16bit",
+  "version": "0.3.2",
   "description": "A easy and foolish way to develop a socket module, which is easy to use as well. Now support both TCP and UDP.",
   "main": "index.js",
   "scripts": {
@@ -9,16 +9,16 @@
   "keywords": [
     "socket"
   ],
-  "author": "vicyao",
+  "author": "neallin",
   "license": "ISC",
   "_shasum": "77ea2bfa6c10379f0792e3eb8116bab8d316be62",
-  "_from": "easy_sock@",
+  "_from": "easy_sock@ysbcc | https://github.com/ysbcc/easy_sock.git",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ysbcc/easy_sock.git"
+    "url": "git+https://github.com/neallin/easy_sock.git"
   },
   "bugs": {
-    "url": "https://github.com/ysbcc/easy_sock/issues"
+    "url": "https://github.com/neallin/easy_sock/issues"
   },
   "homepage": "https://github.com/ysbcc/easy_sock#readme"
 }
